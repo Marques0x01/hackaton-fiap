@@ -1,0 +1,29 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+env/
+venv/
+ENV/
+# Test output
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.tmp
+*.temp
+# Flask
+instance/
+*.sqlite3
+*.db
+# SQLAlchemy
+migrations/
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+# macOS
+.DS_Store
+# Windows
+Thumbs.db

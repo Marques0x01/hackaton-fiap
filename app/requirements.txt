@@ -1,0 +1,6 @@
+flask
+sqlalchemy
+flask-sqlalchemy
+mysql-connector-python
+gunicorn
+flask-restplus
