@@ -4,6 +4,7 @@ from models.mappers.medico_mapper import medico_to_dto
 from utils.datetime_utils import time_to_string
 
 
+
 class MedicoService:
 
     def __init__(self, 
@@ -59,3 +60,8 @@ class MedicoService:
             return {'message': f'médico não encontrado crm: {crm}'}
         horarios = self.__horario_disponivel_repository.get_horario_disponivel_by_medico_id(medico.medico_id)
         return horarios
+    def listar_medicos(self):
+        return self.__medico_repository.find_all_doctors()
+
+    def cadastrar_medico(self, data):
+        return self.__medico_repository.insert_doctor(data)

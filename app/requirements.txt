@@ -1,6 +1,6 @@
 flask
 sqlalchemy
 flask-sqlalchemy
-mysql-connector-python
 gunicorn
-flask-restplus
+marshmallow==3.21.3
+boto3

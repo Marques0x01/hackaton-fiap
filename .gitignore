@@ -27,3 +27,5 @@ migrations/
 .DS_Store
 # Windows
 Thumbs.db
+./hackaton*
+./venv*
