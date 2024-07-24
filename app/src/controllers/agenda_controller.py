@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from services.agenda_service import AgendaService
 from marshmallow import Schema, fields, ValidationError, validates_schema, validate
+from src.services.agenda_service import AgendaService
 
 
 class AgendaSchema(Schema):

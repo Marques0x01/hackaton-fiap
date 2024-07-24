@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Time, TIMESTAMP, Text
 from sqlalchemy.orm import relationship
-from database.database import Base
+from src.database.database import Base
 
 # Definir o modelo Medico
 class Medico(Base):

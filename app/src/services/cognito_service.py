@@ -1,7 +1,7 @@
 import boto3
 from botocore.exceptions import ClientError
 
-from exception.CustomException import ErrorOnConfirmingUser, UsernameAlreadyExistsException
+from src.exception.CustomException import ErrorOnConfirmingUser, UsernameAlreadyExistsException
 
 
 class CognitoService:

@@ -1,9 +1,9 @@
 from flask import Blueprint
 
-from database.repositories.medico_repository import MedicoRepository
-from database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
-from services.medico_service import MedicoService
-from controllers.medico_controller import MedicoController
+from src.database.repositories.medico_repository import MedicoRepository
+from src.database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
+from src.services.medico_service import MedicoService
+from src.controllers.medico_controller import MedicoController
 
 
 medico_repository = MedicoRepository()

@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from services.medico_service import MedicoService
+from src.services.medico_service import MedicoService
 
 class MedicoController:
 

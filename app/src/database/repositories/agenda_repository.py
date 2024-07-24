@@ -1,8 +1,6 @@
-
-
-from database.database import SessionLocal
-from database.models.Entities import Agendamento
-from exception.CustomException import EntityNotFoundException
+from src.database.database import SessionLocal
+from src.database.models.Entities import Agendamento
+from src.exception.CustomException import EntityNotFoundException
 
 
 class AgendaRepository():

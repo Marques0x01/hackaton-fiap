@@ -1,8 +1,6 @@
-
-
-from database.database import SessionLocal
-from database.models.Entities import HorarioDisponivel
 from sqlalchemy.exc import NoResultFound
+from src.database.database import SessionLocal
+from src.database.models.Entities import HorarioDisponivel
 
 
 class HorarioDisponivelRepository():

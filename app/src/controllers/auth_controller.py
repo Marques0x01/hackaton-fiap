@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
-from services.cognito_service import CognitoService
-from services.medico_service import MedicoService
-from services.paciente_service import PacienteService
+from src.services.cognito_service import CognitoService
+from src.services.medico_service import MedicoService
+from src.services.paciente_service import PacienteService
 from marshmallow import Schema, fields, ValidationError, validates_schema, validate
 
 

@@ -1,6 +1,6 @@
 
-from database.repositories.paciente_repository import PacienteRepository
-from exception.CustomException import EntityNotFoundException
+from src.database.repositories.paciente_repository import PacienteRepository
+from src.exception.CustomException import EntityNotFoundException
 
 
 class PacienteService():

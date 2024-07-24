@@ -1,4 +1,4 @@
-from models.dtos.medico_dto import MedicoDTO, EnderecoMedicoDTO
+from src.models.dtos.medico_dto import MedicoDTO, EnderecoMedicoDTO
 
 def medico_to_dto(medico):
     endereco_dto = [endereco_to_dto(endereco).__dict__ for endereco in medico.endereco]

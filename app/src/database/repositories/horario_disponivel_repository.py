@@ -1,6 +1,6 @@
-from database.database import get_db
 from sqlalchemy import and_
-from database.models.Entities import HorarioDisponivel
+from src.database.database import get_db
+from src.database.models.Entities import HorarioDisponivel
 
 class HorarioDisponivelRepository:
 

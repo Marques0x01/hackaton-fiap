@@ -1,6 +1,6 @@
 
-from database.repositories.horario_disponiel_repository import HorarioDisponivelRepository
-from exception.CustomException import EntityNotFoundException
+from src.database.repositories.horario_disponiel_repository import HorarioDisponivelRepository
+from src.exception.CustomException import EntityNotFoundException
 
 
 class HorarioDisponivelService():

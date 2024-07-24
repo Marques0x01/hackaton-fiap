@@ -1,6 +1,6 @@
-from database.database import get_db
 from sqlalchemy import and_
-from database.models.Entities import EnderecoMedico, Medico
+from src.database.database import get_db
+from src.database.models.Entities import EnderecoMedico, Medico
 
 
 class MedicoRepository:

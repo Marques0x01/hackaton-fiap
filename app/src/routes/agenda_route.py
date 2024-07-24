@@ -1,12 +1,12 @@
 from flask import Blueprint
 
-from database.repositories.agenda_repository import AgendaRepository
-from database.repositories.paciente_repository import PacienteRepository
-from database.repositories.horario_disponiel_repository import HorarioDisponivelRepository
-from services.agenda_service import AgendaService
-from services.horario_disponivel_service import HorarioDisponivelService
-from services.paciente_service import PacienteService
-from controllers.agenda_controller import AgendaController
+from src.database.repositories.agenda_repository import AgendaRepository
+from src.database.repositories.paciente_repository import PacienteRepository
+from src.database.repositories.horario_disponiel_repository import HorarioDisponivelRepository
+from src.services.agenda_service import AgendaService
+from src.services.horario_disponivel_service import HorarioDisponivelService
+from src.services.paciente_service import PacienteService
+from src.controllers.agenda_controller import AgendaController
 
 
 paciente_repository = PacienteRepository()

@@ -1,12 +1,12 @@
 from flask import Blueprint
 
-from controllers.auth_controller import AuthController
-from database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
-from database.repositories.medico_repository import MedicoRepository
-from database.repositories.paciente_repository import PacienteRepository
-from services.cognito_service import CognitoService
-from services.medico_service import MedicoService
-from services.paciente_service import PacienteService
+from src.controllers.auth_controller import AuthController
+from src.database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
+from src.database.repositories.medico_repository import MedicoRepository
+from src.database.repositories.paciente_repository import PacienteRepository
+from src.services.cognito_service import CognitoService
+from src.services.medico_service import MedicoService
+from src.services.paciente_service import PacienteService
 
 
 service = CognitoService()

@@ -1,8 +1,8 @@
 
-from database.repositories.agenda_repository import AgendaRepository
-from services.horario_disponivel_service import HorarioDisponivelService
-from services.paciente_service import PacienteService
-from exception.CustomException import EntityNotFoundException
+from src.database.repositories.agenda_repository import AgendaRepository
+from src.services.horario_disponivel_service import HorarioDisponivelService
+from src.services.paciente_service import PacienteService
+from src.exception.CustomException import EntityNotFoundException
 
 
 class AgendaService:

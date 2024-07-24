@@ -1,7 +1,7 @@
-from database.repositories.medico_repository import MedicoRepository
-from database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
-from models.mappers.medico_mapper import medico_to_dto
-from utils.datetime_utils import time_to_string
+from src.database.repositories.medico_repository import MedicoRepository
+from src.database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
+from src.models.mappers.medico_mapper import medico_to_dto
+from src.utils.datetime_utils import time_to_string
 
 
 

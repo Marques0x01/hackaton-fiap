@@ -1,6 +1,6 @@
-from database.database import SessionLocal
-from database.models.Entities import EnderecoPaciente, Paciente
 from sqlalchemy.exc import NoResultFound
+from src.database.database import SessionLocal
+from src.database.models.Entities import EnderecoPaciente, Paciente
 
 class PacienteRepository():
     
