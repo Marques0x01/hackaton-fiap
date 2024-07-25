@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches: ["master"]
+
+env:
+  TF_ACTION_WORKING_DIR: "infra"
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: "us-east-2"
+
+jobs:
+  publish-image-ecr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: agenda_suspeita
+          IMAGE_TAG: latest
+        run: |
+          cd app
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+  create-ecr:
+    needs: publish-image-ecr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Terraform init
+        run: |
+          cd infra/ecr
+          terraform init
+
+      - name: Terraform plan
+        run: |
+          cd infra/ecr
+          terraform plan
+
+      - name: Terraform apply
+        run: |
+          cd infra/ecr
+          terraform apply --auto-approve
+
+  create-ecs-cluster:
+    needs: create-ecr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Terraform init
+        run: |
+          cd infra/cluster
+          terraform init
+
+      - name: Terraform plan
+        run: |
+          cd infra/cluster
+          terraform plan
+
+      - name: Terraform apply
+        run: |
+          cd infra/cluster
+          terraform apply --auto-approve
+
+  create-ecs-service:
+    needs: create-ecs-cluster
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Terraform init
+        run: |
+          cd infra/ecs
+          terraform init
+
+      - name: Terraform plan
+        run: |
+          cd infra/ecs
+          terraform plan
+
+      - name: Terraform apply
+        run: |
+          cd infra/ecs
+          terraform apply --auto-approve
