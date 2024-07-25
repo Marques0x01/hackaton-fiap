@@ -1,11 +1,11 @@
 from sqlalchemy.exc import NoResultFound
-from src.database.database import SessionLocal
+from src.database.database import get_db
 from src.database.models.Entities import EnderecoPaciente, Paciente
 
 class PacienteRepository():
     
     def save_paciente(self, paciente_data):
-        session = SessionLocal()
+        session = next(get_db())
 
         try:
             endereco = paciente_data.get("endereco")
@@ -15,7 +15,7 @@ class PacienteRepository():
                 email=paciente_data.get("email"),
                 data_nascimento=paciente_data.get("data_nascimento"),
                 telefone=paciente_data.get("telefone"),
-                cpf=paciente_data.get("documento")
+                cpf=paciente_data.get("cpf")
             )
 
             novo_endereco = EnderecoPaciente(
@@ -30,8 +30,9 @@ class PacienteRepository():
 
             session.add(novo_paciente)
             session.add(novo_endereco)
-
             session.commit()
+            session.refresh(novo_paciente)
+            session.refresh(novo_endereco)
 
             return {
                 "user": paciente_data.get("documento"),
@@ -45,7 +46,7 @@ class PacienteRepository():
             session.close()
 
     def get_paciente_por_id(self, cpf):
-        session = SessionLocal()
+        session = next(get_db())
         try:
             return session.query(Paciente).filter(Paciente.cpf == cpf).one()
         except NoResultFound:

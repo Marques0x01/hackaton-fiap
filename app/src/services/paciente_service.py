@@ -9,7 +9,7 @@ class PacienteService():
         self.__repository = paciente_repository
 
     def cadastrar_paciente(self, data):
-        self.__repository.save_paciente(data)
+        return self.__repository.save_paciente(data)
 
     def get_por_documento(self, documento):
         paciente = self.__repository.get_paciente_por_id(documento)

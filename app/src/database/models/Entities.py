@@ -128,6 +128,13 @@ class Agendamento(Base):
     horario = relationship('HorarioDisponivel', back_populates='agendamentos')
     paciente = relationship('Paciente', back_populates='agendamentos')
 
+    def to_dict(self):
+        return {
+            'agendamento_id': self.agendamento_id,
+            'horario_id': self.horario_id,
+            'paciente_id': self.paciente_id,
+            'status': self.status
+        }
 
 # Definir o modelo Avaliacao
 class Avaliacao(Base):

@@ -59,7 +59,9 @@ class MedicoService:
         if medico is None:
             return {'message': f'médico não encontrado crm: {crm}'}
         horarios = self.__horario_disponivel_repository.get_horario_disponivel_by_medico_id(medico.medico_id)
-        return horarios
+        if horarios is None: 
+            return {'message': f'nenhum horário disponivel para o Dr(a) {medico.nome}'}
+        return [horario.to_dict() for horario in horarios]
     def listar_medicos(self):
         return self.__medico_repository.find_all_doctors()
 

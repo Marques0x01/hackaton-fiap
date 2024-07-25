@@ -24,7 +24,7 @@ class MedicoController:
 
     def get_horarios_disponiveis(self, crm: str): 
         horarios = self.__service.listar_horarios_por_medico(crm)
-        return jsonify([horario.to_dict() for horario in horarios])
+        return jsonify(horarios)
 
     def post_horario_disponivel(self, crm: str):
         data = request.get_json()
