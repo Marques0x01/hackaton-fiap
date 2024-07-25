@@ -28,3 +28,4 @@ migrations/
 # Windows
 Thumbs.db
 ./hackaton*
+./venv*

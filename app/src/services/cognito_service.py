@@ -1,13 +1,13 @@
 import boto3
 from botocore.exceptions import ClientError
 
-from exception.CustomException import ErrorOnConfirmingUser, UsernameAlreadyExistsException
+from src.exception.CustomException import ErrorOnConfirmingUser, UsernameAlreadyExistsException
 
 
 class CognitoService:
 
     def __init__(self):
-        self.client = boto3.client('cognito-idp')
+        self.client = boto3.client('cognito-idp', region_name='us-east-1')
         self.USER_POOL_ID_MEDICO = "us-east-1_ElT7uQiBk"
         self.USER_POOL_ID_USER = 'us-east-1_vXfTgXpUy'
         self.CLIENT_ID_MEDICO = "3csj0jjae2osr0c5irm1qpq5hq"

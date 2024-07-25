@@ -1,21 +1,18 @@
 from flask import Blueprint
 
-from app.src.controllers.agenda_controller import AgendaController
-from app.src.controllers.auth_controller import AuthController
-from app.src.database.repositories.agenda_repository import AgendaRepository
-from app.src.database.repositories.medico_repository import MedicoRepository
-from app.src.database.repositories.paciente_repository import PacienteRepository
-from app.src.services.agenda_service import AgendaService
-from app.src.services.cognito_service import CognitoService
-from app.src.services.horario_disponivel_service import HorarioDisponivelService
-from app.src.services.medico_service import MedicoService
-from app.src.services.paciente_service import PacienteService
+from src.controllers.auth_controller import AuthController
+from src.database.repositories.horario_disponivel_repository import HorarioDisponivelRepository
+from src.database.repositories.medico_repository import MedicoRepository
+from src.database.repositories.paciente_repository import PacienteRepository
+from src.services.cognito_service import CognitoService
+from src.services.medico_service import MedicoService
+from src.services.paciente_service import PacienteService
 
 
 service = CognitoService()
-medico_service = MedicoService(MedicoRepository())
+medico_service = MedicoService(MedicoRepository(), HorarioDisponivelRepository())
 paciente_service = PacienteService(PacienteRepository())
-controller = AuthController()
+controller = AuthController(service, medico_service, paciente_service)
 
 auth_bp = Blueprint('auth', __name__)
 

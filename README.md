@@ -2,8 +2,17 @@
 
 ## Criação de MVP para agendamento e consulta com médicos
 
-
-## Docker para DB do projeto 
+# Execução via container do projeto
+#### Criação da app via Dockerfile
+- Na pasta ./app execute o comando abaixo para criar uma imagem docker com base no Dockerfile configurado na aplicação
+``` bash
+docker build -t fiap_saude . 
+```
+#### Execução do container da aplicação
+```
+docker run -d -p 8080:8080 fiap_saude
+```
+## DB do projeto 
 ``` bash
 docker run --name dopamina_hospital -e MYSQL_ROOT_PASSWORD=123456789 -e MYSQL_DATABASE=dopamina_hospital -e MYSQL_USER=admin -e MYSQL_PASSWORD=123456789 -p 3306:3306 -d mysql:latest
 ```

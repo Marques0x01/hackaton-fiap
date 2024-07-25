@@ -24,3 +24,11 @@ class EntityNotFoundException(Exception):
 
     def __str__(self):
         return f"Data not found: {self.message}"
+
+class AlreadExistsException(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+        self.message = message
+
+    def __str__(self):
+        return f"Data found: {self.message}"

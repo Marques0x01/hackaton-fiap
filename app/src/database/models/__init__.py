@@ -1,4 +1,4 @@
-from database.database import Base, engine
-from database.models.Entities import Medico, EnderecoMedico
+from src.database.database import Base, engine
+from src.database.models.Entities import *
 
 Base.metadata.create_all(bind=engine)
