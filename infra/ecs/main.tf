@@ -10,6 +10,34 @@ data "aws_ecs_cluster" "agenda_suspeita_cluster" {
   cluster_name = "agenda_suspeita_cluster"
 }
 
+resource "aws_iam_role" "ecsTaskExecutionRole" {
+  name = "ecsTaskExecutionRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
+        Effect = "Allow"
+      }
+    ]
+  })
+
+  # Use the lifecycle block to prevent creating the role if it already exists
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = all
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
+  role       = aws_iam_role.ecsTaskExecutionRole.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
 resource "aws_ecs_task_definition" "agenda_suspeita_task" {
   family                   = "agenda_suspeita"
   network_mode             = "awsvpc"
@@ -47,28 +75,6 @@ resource "aws_ecs_service" "agenda_suspeita_service" {
   }
 }
 
-resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name = "ecsTaskExecutionRole"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Principal = {
-          Service = "ecs-tasks.amazonaws.com"
-        }
-        Effect = "Allow"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
-  role       = aws_iam_role.ecsTaskExecutionRole.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
 resource "aws_security_group" "sg" {
   name        = "allow_http"
   description = "Allow HTTP inbound traffic"
@@ -90,8 +96,8 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
 }
 
