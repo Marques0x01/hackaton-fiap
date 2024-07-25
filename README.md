@@ -14,7 +14,7 @@ docker run -d -p 8080:8080 fiap_saude
 ```
 ## DB do projeto 
 ``` bash
-docker run --name dopamina_hospital -e MYSQL_ROOT_PASSWORD=123456789 -e MYSQL_DATABASE=dopamina_hospital -e MYSQL_USER=admin -e MYSQL_PASSWORD=123456789 -p 3306:3306 -d mysql:latest
+docker run --name consultorio -e MYSQL_ROOT_PASSWORD=123456789 -e MYSQL_DATABASE=consultorio -e MYSQL_USER=admin -e MYSQL_PASSWORD=123456789 -p 3306:3306 -d mysql:latest
 ```
 ### Criação de tabelas
 ``` sql

@@ -8,10 +8,10 @@ class CognitoService:
 
     def __init__(self):
         self.client = boto3.client('cognito-idp', region_name='us-east-1')
-        self.USER_POOL_ID_MEDICO = "us-east-1_ElT7uQiBk"
-        self.USER_POOL_ID_USER = 'us-east-1_vXfTgXpUy'
-        self.CLIENT_ID_MEDICO = "3csj0jjae2osr0c5irm1qpq5hq"
-        self.CLIENT_ID_USER = "4q55jse91ctp96a8miro8evj37"
+        self.USER_POOL_ID_MEDICO = "us-east-2_jQArCPh0p"
+        self.USER_POOL_ID_USER = 'us-east-2_VeeUUZslG'
+        self.CLIENT_ID_MEDICO = "269b27fe44k0voqf6b84s6dq33"
+        self.CLIENT_ID_USER = "6v4c2oqrgv71f0slpk91fjfh2f"
 
     def login(self, username, password, type_user):
         CLIENT_ID = self.CLIENT_ID_MEDICO if type_user == "DOCTOR" else self.CLIENT_ID_USER
