@@ -1,4 +1,5 @@
 from sqlalchemy import and_, not_
+from sqlalchemy.exc import NoResultFound
 from src.database.database import get_db
 from src.database.models.Entities import HorarioDisponivel, Agendamento
 
@@ -6,10 +7,16 @@ class HorarioDisponivelRepository:
 
     def get_horario_by_id(self, horario_id: int):
         session = next(get_db())
-        horario = session.query(HorarioDisponivel).filter(
-            HorarioDisponivel.horario_id == horario_id
-        ).one()
-        return horario
+        try:
+            return session.query(HorarioDisponivel).filter(HorarioDisponivel.horario_id == horario_id).one()
+        except NoResultFound:
+            return None
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            raise e
+        finally:
+            session.close()
+
 
     def get_horario_disponivel_by_medico_id(self, medico_id: int):
         session = next(get_db())

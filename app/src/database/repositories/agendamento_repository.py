@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from src.database.models import Agendamento  # Certifique-se de que o caminho esteja correto
+from src.database.models import Agendamento
 from src.database.database import get_db
 
 

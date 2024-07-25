@@ -3,7 +3,7 @@ from src.database.repositories.horario_disponivel_repository import HorarioDispo
 from src.exception.CustomException import EntityNotFoundException
 
 
-class HorarioDisponivelService():
+class HorarioDisponivelService:
 
     def __init__(self, horario_disponivel_repository: HorarioDisponivelRepository) -> None:
         self.__repository = horario_disponivel_repository
