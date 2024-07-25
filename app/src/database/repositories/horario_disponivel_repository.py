@@ -65,8 +65,9 @@ class HorarioDisponivelRepository:
             session.close()
 
     def update_horario_disponivel(self, horario_disponivel):
+        session = next(get_db())
         try:
-            session = next(get_db())
+            horario_disponivel = session.merge(horario_disponivel)
             session.commit()
             session.refresh(horario_disponivel)
             return horario_disponivel
