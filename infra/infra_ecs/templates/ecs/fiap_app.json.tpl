@@ -9,7 +9,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/fiap-app",
-          "awslogs-region": "us-east-2",
+          "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
     },

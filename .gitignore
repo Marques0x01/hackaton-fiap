@@ -27,6 +27,6 @@ migrations/
 .DS_Store
 # Windows
 Thumbs.db
-./*hack_env*
+hack_toon/
 ./venv*
 
