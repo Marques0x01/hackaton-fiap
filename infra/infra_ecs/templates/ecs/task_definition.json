@@ -1,0 +1,25 @@
+[
+    {
+        "name": "fiap-container",
+        "image": "agenda_suspeita:latest",
+        "cpu": 256,
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+            {
+                "containerPort": 3000,
+                "hostPort": 3000
+            }
+        ],
+        "environment": [
+            {
+                "name": "ENV_VAR_1",
+                "value": "value1"
+            },
+            {
+                "name": "ENV_VAR_2",
+                "value": "value2"
+            }
+        ]
+    }
+]
