@@ -24,7 +24,8 @@ resource "aws_iam_policy" "policy" {
         "ec2:*",
         "ecs:*",
         "ecr:*",
-        "logs:*"
+        "logs:*",
+        "cognito-idp:*"
       ],
       "Resource" : "*"
     }]
