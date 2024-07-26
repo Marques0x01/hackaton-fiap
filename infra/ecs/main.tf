@@ -10,15 +10,9 @@ data "aws_ecs_cluster" "agenda_suspeita_cluster" {
   cluster_name = "agenda_suspeita_cluster"
 }
 
-# Use a data source to fetch the existing IAM role if it exists
-data "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole"
-}
-
+# Cria uma nova IAM Role com um nome diferente
 resource "aws_iam_role" "ecsTaskExecutionRole" {
-  count = data.aws_iam_role.ecs_task_execution_role.id != "" ? 0 : 1
-
-  name = "ecsTaskExecutionRole"
+  name = "ecsTaskExecutionRoleNew"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -35,7 +29,7 @@ resource "aws_iam_role" "ecsTaskExecutionRole" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
-  role       = aws_iam_role.ecsTaskExecutionRole[0].name
+  role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
@@ -43,7 +37,7 @@ resource "aws_ecs_task_definition" "agenda_suspeita_task" {
   family                   = "agenda_suspeita"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   cpu                      = "256"
   memory                   = "512"
 
