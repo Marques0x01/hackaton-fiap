@@ -7,11 +7,11 @@ from src.exception.CustomException import ErrorOnConfirmingUser, UsernameAlready
 class CognitoService:
 
     def __init__(self):
-        self.client = boto3.client('cognito-idp', region_name='us-east-1')
-        self.USER_POOL_ID_MEDICO = "us-east-1_jQArCPh0p"
-        self.USER_POOL_ID_USER = 'us-east-1_VeeUUZslG'
-        self.CLIENT_ID_MEDICO = "269b27fe44k0voqf6b84s6dq33"
-        self.CLIENT_ID_USER = "6v4c2oqrgv71f0slpk91fjfh2f"
+        self.client = boto3.client('cognito-idp', region_name='us-east-2')
+        self.USER_POOL_ID_MEDICO = "us-east-2_2iK5881ft"
+        self.CLIENT_ID_MEDICO = "3m98e9e4eiiu75376cegr987rn"
+        self.USER_POOL_ID_USER = 'us-east-2_KmSzCvt2n'
+        self.CLIENT_ID_USER = "6uq5d5m39gmlaaj8kc1c1e6acf"
 
     def login(self, username, password, type_user):
         CLIENT_ID = self.CLIENT_ID_MEDICO if type_user == "DOCTOR" else self.CLIENT_ID_USER
