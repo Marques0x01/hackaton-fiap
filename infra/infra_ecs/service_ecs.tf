@@ -29,11 +29,11 @@ resource "aws_ecs_service" "main" {
     assign_public_ip = true
   }
 
-  load_balancer {
-    target_group_arn = aws_alb_target_group.target_group.id
-    container_name   = "fiap-app"
-    container_port   = 8080
-  }
+  # load_balancer {
+  #   target_group_arn = aws_alb_target_group.target_group.id
+  #   container_name   = "fiap-app"
+  #   container_port   = 8080
+  # }
 
-  depends_on = [aws_alb_listener.front_end, aws_ecs_task_definition.app]
+  # depends_on = [aws_alb_listener.front_end, aws_ecs_task_definition.app]
 }
