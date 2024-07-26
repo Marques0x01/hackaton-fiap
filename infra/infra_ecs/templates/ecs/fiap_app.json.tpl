@@ -1,7 +1,7 @@
 [
   {
     "name": "fiap-app",
-    "image": "010438496882.dkr.ecr.us-east-2.amazonaws.com/agenda_suspeita:latest",
+    "image": "010438496882.dkr.ecr.us-east-1.amazonaws.com/agenda_suspeita:latest",
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc",
@@ -9,7 +9,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/fiap-app",
-          "awslogs-region": "us-east-2",
+          "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
     },
