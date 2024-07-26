@@ -14,12 +14,16 @@ data "aws_vpc" "main" {
   id = "vpc-0a2df8074681f79f3"
 }
 
-data "aws_subnet" "public_subnets" {
-  ids = [
-    "subnet-001113aebb3a0086f",
-    "subnet-0379b250a6d6affdb",
-    "subnet-0fe974589b952abe5"
-  ]
+data "aws_subnet" "subnet1" {
+  id = "subnet-001113aebb3a0086f"
+}
+
+data "aws_subnet" "subnet2" {
+  id = "subnet-0379b250a6d6affdb"
+}
+
+data "aws_subnet" "subnet3" {
+  id = "subnet-0fe974589b952abe5"
 }
 
 data "aws_security_group" "allow_http" {
@@ -57,7 +61,11 @@ resource "aws_ecs_service" "agenda_suspeita_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = data.aws_subnet.public_subnets.ids
+    subnets          = [
+      data.aws_subnet.subnet1.id,
+      data.aws_subnet.subnet2.id,
+      data.aws_subnet.subnet3.id
+    ]
     security_groups  = [data.aws_security_group.allow_http.id]
     assign_public_ip = true
   }
