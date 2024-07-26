@@ -1,7 +1,7 @@
 [
   {
     "name": "fiap-app",
-    "image": "559051604752.dkr.ecr.us-east-2.amazonaws.com/agenda_suspeita:latest",
+    "image": "559051604752.dkr.ecr.us-east-2.amazonaws.com/agenda:latest",
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc",

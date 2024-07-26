@@ -1,7 +1,7 @@
 [
     {
         "name": "fiap-container",
-        "image": "agenda_suspeita:latest",
+        "image": "agenda:latest",
         "cpu": 256,
         "memory": 512,
         "essential": true,

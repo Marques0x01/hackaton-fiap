@@ -2,8 +2,8 @@
 #   name               = "fiap-elb"
 #   internal           = false
 #   load_balancer_type = "application"
-#   security_groups    = ["sg-04f14be79d56e0c51"]
-#   subnets = ["subnet-001113aebb3a0086f", "subnet-0379b250a6d6affdb", "subnet-0fe974589b952abe5"]
+#   security_groups    = ["sg-03773f25129fe387c"]
+#   subnets = ["subnet-096f32102466e631f", "subnet-089dfee703f076258", "subnet-0587620277dc78ef2"]
 
 # }
 
@@ -23,7 +23,7 @@
 #   name        = "fiap-target-group"
 #   port        = 8080
 #   protocol    = "HTTP"
-#   vpc_id      = "vpc-0a2df8074681f79f3"
+#   vpc_id      = "vpc-0224055d409e21a66"
 #   target_type = "ip"
 
 #   health_check {

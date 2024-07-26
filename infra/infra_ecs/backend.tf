@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket         = "hackatun"
-    key            = "hackatun/terraform.tfstate"
+    bucket         = "agendaconsultorio"
+    key            = "agendaconsultorio/terraform.tfstate"
     region         = "us-east-2"
     
   }
