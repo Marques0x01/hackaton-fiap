@@ -30,11 +30,15 @@ data "aws_security_group" "allow_http" {
   id = "sg-04f14be79d56e0c51"
 }
 
+data "aws_iam_role" "ecsTaskExecutionRole" {
+  name = "ecsTaskExecutionRole"
+}
+
 resource "aws_ecs_task_definition" "agenda_suspeita_task" {
   family                   = "agenda_suspeita"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
+  execution_role_arn       = data.aws_iam_role.ecsTaskExecutionRole.arn
   cpu                      = "256"
   memory                   = "512"
 
@@ -71,24 +75,7 @@ resource "aws_ecs_service" "agenda_suspeita_service" {
   }
 }
 
-resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name = "ecsTaskExecutionRole"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Principal = {
-          Service = "ecs-tasks.amazonaws.com"
-        }
-        Effect = "Allow"
-      }
-    ]
-  })
-}
-
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
-  role       = aws_iam_role.ecsTaskExecutionRole.name
+  role       = data.aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
