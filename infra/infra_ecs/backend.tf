@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket         = "hackatin"
-    key            = "hackatin/terraform.tfstate"
+    bucket         = "hackatuun"
+    key            = "hackatuun/terraform.tfstate"
     region         = "us-east-1"
     
   }
