@@ -8,7 +8,7 @@ DATABASE_PASSWORD = os.getenv("DB_PASSWORD", "mysecretpassword")
 DATABASE_HOST = os.getenv("DB_HOST", "localhost")
 DATABASE_PORT = os.getenv("DB_PORT", "3306")
 DATABASE_NAME = os.getenv("DB_NAME", "consultorio")
-DATABASE_URL = f"mysql+mysqlconnector://admin:mysecretpassword@consultorio.ctsmmygc4cmh.us-east-2.rds.amazonaws.com:3306/consultorio"
+DATABASE_URL = f"mysql+mysqlconnector://admin:mysecretpassword@consultorio.c1cei8y2odw7.us-east-2.rds.amazonaws.com:3306/consultorio"
 engine = create_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
