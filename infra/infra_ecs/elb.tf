@@ -26,13 +26,13 @@ resource "aws_alb_target_group" "target_group" {
   vpc_id      = "vpc-0a2df8074681f79f3"
   target_type = "ip"
 
-  # health_check {
-  #   healthy_threshold   = "3"
-  #   interval            = "60"
-  #   protocol            = "HTTP"
-  #   matcher             = "200"
-  #   timeout             = "10"
-  #   path                = "/medicos"
-  #   unhealthy_threshold = "3"
-  # }
+  health_check {
+    healthy_threshold   = "3"
+    interval            = "60"
+    protocol            = "HTTP"
+    matcher             = "200"
+    timeout             = "10"
+    path                = "/health"
+    unhealthy_threshold = "3"
+  }
 }
