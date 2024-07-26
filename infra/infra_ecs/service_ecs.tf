@@ -5,9 +5,11 @@ data "template_file" "fiap_app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = "fiap-app-task"
-  execution_role_arn       = aws_iam_role.role.arn
+  family             = "fiap-app-task"
+  execution_role_arn = aws_iam_role.role.arn
+  task_role_arn      = aws_iam_role.role.arn
   network_mode             = "awsvpc"
+  
   requires_compatibilities = ["FARGATE"]
   cpu                      = 512
   memory                   = 1024
@@ -22,8 +24,8 @@ resource "aws_ecs_service" "main" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = ["sg-04f14be79d56e0c51"]
-    subnets = ["subnet-001113aebb3a0086f", "subnet-0379b250a6d6affdb", "subnet-0fe974589b952abe5"]
+    security_groups  = ["sg-04f14be79d56e0c51"]
+    subnets          = ["subnet-001113aebb3a0086f", "subnet-0379b250a6d6affdb", "subnet-0fe974589b952abe5"]
     assign_public_ip = true
   }
 
