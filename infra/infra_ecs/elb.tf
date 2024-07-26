@@ -10,7 +10,7 @@ resource "aws_alb" "load_balancer" {
 
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.load_balancer.id
-  port              = 3000
+  port              = 8080
   protocol          = "HTTP"
 
   default_action {
