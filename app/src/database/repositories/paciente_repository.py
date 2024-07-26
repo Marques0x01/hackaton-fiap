@@ -15,7 +15,7 @@ class PacienteRepository():
                 email=paciente_data.get("email"),
                 data_nascimento=paciente_data.get("data_nascimento"),
                 telefone=paciente_data.get("telefone"),
-                cpf=paciente_data.get("cpf")
+                cpf=paciente_data.get("documento")
             )
 
             novo_endereco = EnderecoPaciente(

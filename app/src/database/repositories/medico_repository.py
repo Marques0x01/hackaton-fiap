@@ -4,6 +4,7 @@ from sqlalchemy.exc import NoResultFound
 from src.database.database import get_db
 from src.database.models.Entities import EnderecoMedico, Medico
 
+
 class MedicoRepository:
 
     def find_all_doctors(self):
@@ -56,23 +57,22 @@ class MedicoRepository:
     def insert_doctor(self, doctor_data):
         try:
             session = next(get_db())
-            doctor = doctor_data.get("doctor")
-            address = doctor_data.get("address")
+            address = doctor_data.get("endereco")
             novo_medico = Medico(
-                nome=doctor.get("name"),
-                email=doctor.get("email"),
-                crm=doctor.get("crm"),
-                cnpj=doctor.get("cnpj"),
-                especialidade=doctor.get("speciality")
+                nome=doctor_data.get("nome"),
+                email=doctor_data.get("email"),
+                crm=doctor_data.get("documento"),
+                cnpj=doctor_data.get("cnpj"),
+                especialidade=doctor_data.get("especialidade")
             )
 
             novo_endereco = EnderecoMedico(
                 cep=address.get("cep"),
-                numero=address.get("number"),
-                estado=address.get("state"),
-                municipio=address.get("county"),
-                bairro=address.get("neighborhood"),
-                rua=address.get("street"),
+                numero=address.get("numero"),
+                estado=address.get("estado"),
+                municipio=address.get("pais"),
+                bairro=address.get("bairro"),
+                rua=address.get("rua"),
                 medico=novo_medico
             )
 
