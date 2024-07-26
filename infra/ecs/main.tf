@@ -10,6 +10,22 @@ data "aws_ecs_cluster" "agenda_suspeita_cluster" {
   cluster_name = "agenda_suspeita_cluster"
 }
 
+data "aws_vpc" "main" {
+  id = "vpc-0a2df8074681f79f3"
+}
+
+data "aws_subnet" "public_subnets" {
+  ids = [
+    "subnet-001113aebb3a0086f",
+    "subnet-0379b250a6d6affdb",
+    "subnet-0fe974589b952abe5"
+  ]
+}
+
+data "aws_security_group" "allow_http" {
+  id = "sg-04f14be79d56e0c51"
+}
+
 resource "aws_ecs_task_definition" "agenda_suspeita_task" {
   family                   = "agenda_suspeita"
   network_mode             = "awsvpc"
@@ -41,8 +57,8 @@ resource "aws_ecs_service" "agenda_suspeita_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = [aws_subnet.public.id]
-    security_groups  = [aws_security_group.sg.id]
+    subnets          = data.aws_subnet.public_subnets.ids
+    security_groups  = [data.aws_security_group.allow_http.id]
     assign_public_ip = true
   }
 }
@@ -67,34 +83,4 @@ resource "aws_iam_role" "ecsTaskExecutionRole" {
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-resource "aws_security_group" "sg" {
-  name        = "allow_http"
-  description = "Allow HTTP inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-  map_public_ip_on_launch = true
-}
-
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
 }
