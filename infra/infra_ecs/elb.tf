@@ -32,7 +32,7 @@ resource "aws_alb_target_group" "target_group" {
     protocol            = "HTTP"
     matcher             = "200,301"
     timeout             = "10"
-    path                = "/api-docs"
+    path                = "/medicos"
     unhealthy_threshold = "3"
   }
 }
