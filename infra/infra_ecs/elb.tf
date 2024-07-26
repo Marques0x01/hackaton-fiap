@@ -8,16 +8,16 @@ resource "aws_alb" "load_balancer" {
 }
 
 
-resource "aws_alb_listener" "front_end" {
-  load_balancer_arn = aws_alb.load_balancer.id
-  port              = 8080
-  protocol          = "HTTP"
+# resource "aws_alb_listener" "front_end" {
+#   load_balancer_arn = aws_alb.load_balancer.id
+#   port              = 8080
+#   protocol          = "HTTP"
 
-  default_action {
-    target_group_arn = aws_alb_target_group.target_group.id
-    type             = "forward"
-  }
-}
+#   default_action {
+#     target_group_arn = aws_alb_target_group.target_group.id
+#     type             = "forward"
+#   }
+# }
 
 resource "aws_alb_target_group" "target_group" {
   name        = "fiap-target-group"
@@ -26,13 +26,13 @@ resource "aws_alb_target_group" "target_group" {
   vpc_id      = "vpc-0948f5391118dd3ef"
   target_type = "ip"
 
-  # health_check {
-  #   healthy_threshold   = "3"
-  #   interval            = "60"
-  #   protocol            = "HTTP"
-  #   matcher             = "200"
-  #   timeout             = "10"
-  #   path                = "/medicos"
-  #   unhealthy_threshold = "3"
-  # }
+#   health_check {
+#     healthy_threshold   = "3"
+#     interval            = "60"
+#     protocol            = "HTTP"
+#     matcher             = "200"
+#     timeout             = "10"
+#     path                = "/health"
+#     unhealthy_threshold = "3"
+#   }
 }
